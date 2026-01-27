@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CURLA — Buy Curling Cream</title>
+<meta name="description" content="CURLA Power Cream — The Ultimate Curl Amplifier. Define, nourish, and protect your curls. Cyprus delivery.">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+<style>
+html, body, input, textarea, select, button {
+    font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+:root{--accent:#014d4e}
+
+body{
+    margin:0;
+    background:linear-gradient(180deg,#f5f5f7 0%,#fff 100%);
+    color:#222;
+    line-height:1.55;
+}
+
+/* SHAKE ANIMATION */
+@keyframes shake{
+  0%{transform:translateX(0)}
+  20%{transform:translateX(-4px)}
+  40%{transform:translateX(4px)}
+  60%{transform:translateX(-4px)}
+  80%{transform:translateX(4px)}
+  100%{transform:translateX(0)}
+}
+.shake{animation:shake .4s}
+
+/* ERROR STATE */
+.acs-error{
+    border-color:red !important;
+    box-shadow:0 0 6px rgba(255,0,0,.4);
+}
+
+/* TOP BAR */
+.top-bar{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:10px 20px;background:#fff;
+    box-shadow:0 2px 6px rgba(0,0,0,.06);
+    position:sticky;top:0;z-index:100
+}
+.logo{
+    font-weight:800;font-size:1.3rem;
+    letter-spacing:.18em;text-decoration:none;color:#000
+}
+.socials a{
+    width:36px;height:36px;border-radius:50%;
+    background:#000;color:#fff;
+    display:inline-flex;align-items:center;justify-content:center;
+    margin-left:10px;text-decoration:none
+}
+
+/* HEADER */
+header{
+    padding:50px 20px;background:var(--accent);
+    color:#fff;text-align:center
+}
+header h1{margin:0;font-size:2.6rem;letter-spacing:.25em}
+header p{margin-top:10px;font-size:1.05rem}
+
+/* PRODUCT */
+.product{max-width:900px;margin:30px auto;padding:0 18px}
+
+/* IMAGES */
+.image-grid{
+    display:flex;gap:12px;justify-content:center;flex-wrap:wrap
+}
+.image-grid img{
+    width:260px;border-radius:10px;cursor:pointer;
+    transition:transform .2s, box-shadow .2s
+}
+.image-grid img:hover{
+    transform:translateY(-3px);
+    box-shadow:0 6px 18px rgba(0,0,0,.15)
+}
+
+/* LIGHTBOX */
+#lightbox{
+    display:none;position:fixed;inset:0;
+    background:rgba(0,0,0,.75);
+    align-items:center;justify-content:center;
+    z-index:3000
+}
+#lightbox img{
+    max-width:90%;max-height:90%;
+    border-radius:12px
+}
+
+/* DESCRIPTION */
+.product h2{text-align:center;margin:26px 0 8px;font-size:1.9rem}
+.subheadline{text-align:center;color:#555;margin-bottom:18px}
+
+.benefits{
+    max-width:620px;margin:0 auto 24px;
+    display:grid;gap:8px
+}
+.benefits div::before{
+    content:"✓ ";color:var(--accent);font-weight:700
+}
+
+.section{margin:26px 0}
+.section h3{color:var(--accent);margin-bottom:6px}
+
+/* REVIEW CAROUSEL */
+.review-carousel{
+    max-width:700px;
+    margin:30px auto;
+    text-align:center;
+}
+.review-carousel h3{
+    color:var(--accent);
+    margin-bottom:12px;
+}
+.reviews{
+    position:relative;
+    min-height:60px;
+}
+.review{
+    display:none;
+    font-style:italic;
+    color:#555;
+    font-size:1rem;
+    line-height:1.4;
+}
+.review.active{
+    display:block;
+    animation: fadeIn 0.6s;
+}
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+/* PRICE */
+.price{text-align:center;font-weight:700;font-size:1.2rem;margin:18px 0;color:var(--accent)}
+
+/* QUANTITY */
+.quantity{display:flex;justify-content:center;gap:10px;margin-bottom:18px}
+.quantity button{
+    background:var(--accent);color:#fff;border:0;
+    padding:8px 14px;border-radius:6px;cursor:pointer
+}
+.quantity input{
+    width:66px;text-align:center;
+    border-radius:6px;border:1px solid #ccc
+}
+
+/* DELIVERY */
+.delivery{text-align:center;margin-top:22px}
+.delivery small{display:block;color:#555;margin-bottom:10px}
+.delivery-options{display:flex;justify-content:center;gap:12px}
+.delivery-option{
+    border:2px solid #ddd;padding:10px 16px;
+    border-radius:10px;cursor:pointer;font-weight:700
+}
+.delivery-option.active{
+    background:#00A859;color:#fff;border-color:#fff
+}
+#acsPoint,.acs-error{
+    margin-top:10px;padding:8px;
+    border-radius:8px;border:1px solid #ccc;
+    width:100%;max-width:420px
+}
+#customBoxNow{
+    display:none;margin:10px auto;
+    max-width:420px;padding:8px;
+    border-radius:8px;border:1px solid #ccc
+}
+
+/* FORM */
+.contact-container{max-width:600px;margin:30px auto}
+.contact-form{
+    background:#fff;padding:18px;border-radius:10px;
+    box-shadow:0 4px 14px rgba(0,0,0,.06)
+}
+.contact-row{display:flex;gap:12px;flex-wrap:wrap}
+.contact-col{flex:1;min-width:180px}
+label{font-weight:700}
+input{
+    width:100%;padding:10px;
+    border-radius:8px;border:1px solid #ccc
+}
+.asterisk{
+    color:red;
+    margin-left:4px;
+}
+
+/* BUY */
+.buy-section{text-align:center;margin:30px 0 60px}
+.buy-button{
+    background:var(--accent);color:#fff;
+    border:0;padding:14px 30px;
+    border-radius:12px;font-weight:800;
+    font-size:1.05rem;cursor:pointer;
+    box-shadow:0 6px 18px rgba(0,0,0,.2)
+}
+.buy-note{margin-top:8px;font-size:.9rem;color:#555}
+
+/* FOOTER */
+footer{
+    background:var(--accent);color:#fff;
+    text-align:center;padding:18px;font-size:.95rem
+}
+footer a{color:#fff;text-decoration:underline}
+
+/* MODALS */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    z-index:2000;
+    align-items:center;
+    justify-content:center;
+    overflow-y:auto;
+}
+.modal-content{
+    background:#fff;
+    border-radius:12px;
+    padding:20px;
+    max-width:520px;
+    width:92%;
+    max-height:90vh;
+    overflow-y:auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-bar">
+  <a class="logo" href="#">C U R L A.</a>
+  <div class="socials">
+    <a href="https://www.facebook.com/profile.php?id=61582115168769" target="_blank"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://www.instagram.com/curlacyprus/" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.tiktok.com/@curla.cyprus" target="_blank"><i class="fab fa-tiktok"></i></a>
+    <a href="https://www.youtube.com/@CurlaCyprus" target="_blank"><i class="fab fa-youtube"></i></a>
+  </div>
+</div>
+
+<header>
+  <h1>C U R L A.</h1>
+  <p>Stop fighting your curls.</p>
+</header>
+
+<main class="product">
+
+<div class="image-grid">
+  <img src="product-front.jpg" alt="Curla Curl Cream" />
+  <img src="product-texture.jpg" alt="Curla cream texture" />
+  <img src="product-result.jpg" alt="Defined curls result" />
+</div>
+
+<h2>The Ultimate Curl Amplifier</h2>
+<p class="subheadline">Defined, soft, frizz-free curls — without a 10-step routine.</p>
+
+<div class="benefits">
+  <div>Instant curl definition</div>
+  <div>Zero crunch, zero stickiness</div>
+  <div>Humidity-resistant all day</div>
+  <div>Works on waves, curls & coils</div>
+</div>
+
+<!-- REVIEW CAROUSEL -->
+<div class="review-carousel">
+  <h3>What Our Customers Say</h3>
+  <div class="reviews">
+    <div class="review active">
+      "CURLA completely transformed my curls! Soft, defined, and frizz-free." – Maria C.
+    </div>
+    <div class="review">
+      "Finally a curl cream that works without crunch or stickiness." – Andreas P.
+    </div>
+    <div class="review">
+      "My curls have never looked so alive! I love CURLA." – Elena K.
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>What’s inside</h3>
+  <p>Macadamia & Argan Oils, Shea Butter, Olive Oil, Keratin Proteins & Vitamin E.</p>
+</div>
+
+<div class="section">
+  <h3>Why it works</h3>
+  <p>Smart hold technology defines curls while keeping them soft, flexible, and natural-looking.</p>
+</div>
+
+<div class="section">
+  <strong>Your curls. Your power.</strong>
+</div>
+
+<div class="price">€20 per tub • No subscription</div>
+
+<div class="quantity">
+  <button id="minus">−</button>
+  <input id="quantity" type="number" value="1" min="1" />
+  <button id="plus">+</button>
+</div>
+
+<div class="delivery">
+  <small>Delivery via BoxNow lockers (Cyprus-wide)</small>
+  <div class="delivery-options">
+    <div class="delivery-option active" data-type="acs">BoxNow Locker (+€2)</div>
+  </div>
+
+  <select id="acsPoint">
+    <option value="">Choose BoxNow Locker Location</option>
+    <option value="BoxNow Nicosia – Mall of Cyprus">BoxNow Nicosia – Mall of Cyprus</option>
+    <option value="BoxNow Nicosia – Strovolos">BoxNow Nicosia – Strovolos</option>
+    <option value="BoxNow Limassol – MyMall">BoxNow Limassol – MyMall</option>
+    <option value="BoxNow Limassol – Marina">BoxNow Limassol – Marina</option>
+    <option value="BoxNow Larnaca – Finikoudes">BoxNow Larnaca – Finikoudes</option>
+    <option value="BoxNow Larnaca – Metropolis Mall">BoxNow Larnaca – Metropolis Mall</option>
+    <option value="BoxNow Paphos – Kings Avenue Mall">BoxNow Paphos – Kings Avenue Mall</option>
+    <option value="other">Other BoxNow Location</option>
+  </select>
+
+  <input id="customBoxNow" type="text" placeholder="Enter BoxNow locker location" />
+</div>
+
+<div class="price" id="total">Total: €22.00</div>
+
+<div class="contact-container">
+<form class="contact-form">
+<div class="contact-row">
+<div class="contact-col">
+<label>Full name</label><input id="name" required>
+</div>
+<div class="contact-col">
+<label>Telephone</label><input id="phone" required>
+</div>
+</div>
+<label>Email</label><input id="email" required>
+</form>
+</div>
+
+<div class="buy-section">
+<button id="buyNow" class="buy-button">Buy Now</button>
+<div class="buy-note">Secure checkout • Pay with card or PayPal</div>
+</div>
+
+</main>
+
+<div id="lightbox" onclick="this.style.display='none'">
+  <img />
+</div>
+
+<footer>
+© 2025 CURLA Cyprus · <a href="#">Privacy Policy</a> · <a href="#">Terms</a><br>
+Contact: support@curlacyprus.com
+</footer>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AQpxjE5PX9nOMxeHVPjQZ6UBgeJALbULihRK4i-_940ESH8bHczxreiZrPgENEUacKT6djovEtGG44bC&currency=EUR"></script>
+
+<script>
+// IMAGE LIGHTBOX
+document.querySelectorAll('.image-grid img').forEach(img=>{
+  img.onclick=()=>{
+    document.querySelector('#lightbox img').src=img.src;
+    document.getElementById('lightbox').style.display='flex';
+  }
+});
+
+// QUANTITY
+const qtyEl = document.getElementById('quantity');
+const minusBtn = document.getElementById('minus');
+const plusBtn = document.getElementById('plus');
+const totalEl = document.getElementById('total');
+
+function updateTotal(){
+  let q = parseInt(qtyEl.value) || 1;
+  let delivery = 2;
+  totalEl.textContent = `Total: €${(q*20 + delivery).toFixed(2)}`;
+  return {q, delivery, total: q*20 + delivery};
+}
+
+minusBtn.onclick = () => { qtyEl.value = Math.max(1, qtyEl.value-1); updateTotal(); };
+plusBtn.onclick = () => { qtyEl.value = parseInt(qtyEl.value)+1; updateTotal(); };
+qtyEl.oninput = updateTotal;
+updateTotal();
+
+// DELIVERY BOXNOW
+const acsSelect = document.getElementById('acsPoint');
+const customBox = document.getElementById('customBoxNow');
+
+acsSelect.onchange = ()=>{
+  customBox.style.display = acsSelect.value==='other'?'block':'none';
+};
+
+// REVIEW CAROUSEL AUTO-ROTATE
+const reviewEls = document.querySelectorAll('.review-carousel .review');
+let currentReview = 0;
+function showNextReview(){
+    reviewEls[currentReview].classList.remove('active');
+    currentReview = (currentReview + 1) % reviewEls.length;
+    reviewEls[currentReview].classList.add('active');
+}
+if(reviewEls.length > 0){ reviewEls[0].classList.add('active'); setInterval(showNextReview, 4000); }
+
+// BUY NOW + SHAKE VALIDATION + CY DEFAULT
+const buyBtn = document.getElementById('buyNow');
+const nameEl2 = document.getElementById('name');
+const phoneEl2 = document.getElementById('phone');
+const emailEl2 = document.getElementById('email');
+
+function markError(el){ el.classList.add('acs-error','shake'); setTimeout(()=>el.classList.remove('shake'),400); }
+function clearError(el){ el.classList.remove('acs-error'); }
+[nameEl2, phoneEl2, emailEl2, customBox].forEach(el=>el.addEventListener('input',()=>clearError(el)));
+acsSelect.addEventListener('change',()=>clearError(acsSelect));
+
+buyBtn.onclick = ()=>{
+  // Validation
+  let hasError=false;
+  if(!nameEl2.value.trim()){ markError(nameEl2); hasError=true; }
+  if(!phoneEl2.value.trim()){ markError(phoneEl2); hasError=true; }
+  if(!emailEl2.value.trim()){ markError(emailEl2); hasError=true; }
+  if(acsSelect.value===''){ markError(acsSelect); hasError=true; }
+  if(acsSelect.value==='other' && !customBox.value.trim()){ markError(customBox); hasError=true; }
+  if(hasError) return;
+
+  const {q, total} = updateTotal();
+  const orderSummary = `Name: ${nameEl2.value}\nPhone: ${phoneEl2.value}\nEmail: ${emailEl2.value}\nQuantity: ${q}\nDelivery: ${acsSelect.value==='other'?customBox.value:acsSelect.value}\nTotal: €${total.toFixed(2)}`;
+
+  let modal = document.createElement('div');
+  modal.className='modal';
+  modal.style.display='flex';
+  modal.innerHTML = `<div class="modal-content"><pre>${orderSummary}</pre><div id="paypal-button-container"></div><button id="cancelModal">Cancel</button><div id="paypalError" style="color:red;margin-top:10px;"></div></div>`;
+  document.body.appendChild(modal);
+
+  document.getElementById('cancelModal').onclick=()=>{ modal.remove(); };
+
+  paypal.Buttons({
+    createOrder: (data, actions) => actions.order.create({purchase_units:[{amount:{value:total.toFixed(2)}}]}),
+    onApprove: (data, actions) => {
+      return actions.order.capture().then(details => {
+        fetch("https://formspree.io/f/mjkazqez", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: nameEl2.value,
+            phone: phoneEl2.value,
+            email: emailEl2.value,
+            quantity: qtyEl.value,
+            delivery: acsSelect.value==='other'?customBox.value:acsSelect.value,
+            total: total.toFixed(2),
+            paypalOrderID: details.id,
+            paymentStatus: "success"
+          })
+        }).then(res => {
+          if(!res.ok){
+            document.getElementById('paypalError').textContent = 'Payment received but failed to send order. Please contact support.';
+            console.error('Formspree failed', res.status);
+          } else {
+            modal.innerHTML = `<div class="modal-content"><h2 style="color:green;">Payment Successful!</h2><p>Thank you for your order.</p><button id="closeSuccess">Close</button></div>`;
+            document.getElementById('closeSuccess').onclick = () => modal.remove();
+          }
+        }).catch(err=>{
+          document.getElementById('paypalError').textContent = 'Payment received but failed to send order. Please contact support.';
+          console.error('Formspree error', err);
+        });
+      });
+    },
+    onError: (err) => {
+      // Notify Formspree even if payment failed
+      fetch("https://formspree.io/f/mjkazqez", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: nameEl2.value,
+          phone: phoneEl2.value,
+          email: emailEl2.value,
+          quantity: qtyEl.value,
+          delivery: acsSelect.value==='other'?customBox.value:acsSelect.value,
+          total: total.toFixed(2),
+          paymentStatus: "failed",
+          paypalError: err.toString()
+        })
+      }).catch(console.error);
+
+      document.getElementById('paypalError').textContent = 'PayPal payment failed. Please try again.';
+      console.error('PayPal error', err);
+    },
+    style:{layout:'vertical'},
+    buyerCountry:'CY',
+    shippingPreference:'SET_PROVIDED_ADDRESS',
+    onInit:(data, actions)=>{ actions.enable(); }
+  }).render('#paypal-button-container');
+};
+</script>
+
+</body>
+</html>
